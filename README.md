@@ -8,7 +8,7 @@ You can use Chino in two ways:
 - by running the python script directly
 For example:
 ```bash
-python chino.py --help
+python main.py --help
 ```
 - or by installing chino
 ```bash
