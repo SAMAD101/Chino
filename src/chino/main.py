@@ -35,12 +35,12 @@ def run_conversation(prompt: str, query: bool) -> None:
             messages.append(HumanMessage(content=query_text))
             response: BaseMessage = model.invoke(messages)
             messages.append(SystemMessage(content=response.content))
-            print(f"Chino: {response.content}\n\nSources: {query_sources})")
+            print(f"\nChino: {response.content}\n\nSources: {query_sources})\n-------------------\n")
             continue
         messages.append(HumanMessage(content=prompt))
         response: BaseMessage = model.invoke(messages)
         messages.append(SystemMessage(content=response.content))
-        print(f"Chino: {response.content}")
+        print(f"\nChino: {response.content}\n-------------------\n")
 
 
 def main(
