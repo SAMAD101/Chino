@@ -1,40 +1,53 @@
 # !/usr/bin/python
 
 import typer
-import sys
 
-from openai import OpenAI
+from typing import List, Union
 
-client = OpenAI()
-messages = [
-    {
-        "role": "system",
-        "content": "You are Chino, a chatbot powered by OpenAI's GPT-3.5. 'Chino' means 'curious' in Japanese."
-    },
-]
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    SystemMessagePromptTemplate,
+)
+from langchain.schema import HumanMessage, SystemMessage, BaseMessage
+from langchain_openai import ChatOpenAI
+
+from utils.query_data import query_data
+
+model: ChatOpenAI = ChatOpenAI(model_name="gpt-4-0125-preview")
 
 
-def run_conversation(prompt):
-    global client, messages
+def run_conversation(prompt: str, query: bool) -> None:
+    global model
+
+    messages: List[Union[SystemMessage, HumanMessage]] = [
+        SystemMessage(
+            content="You are Chino, a chatbot based on ChatGPT. 'Chino' means 'intelligence' in Japanese."
+        ),
+    ]
 
     while True:
-        prompt = input("You: ")
+        prompt: str = input("You: ")
         if prompt == "quit":
             break
-        messages.append({"role": "user", "content": prompt})
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
-        messages.append({"role": "system", "content": response.choices[0].message.content})
-        print(f"Chino: {response.choices[0].message.content}")
+        elif query or prompt.lower().startswith("query:"):
+            query_text, query_sources = query_data(prompt)
+            messages.append(HumanMessage(content=query_text))
+            response: BaseMessage = model.invoke(messages)
+            messages.append(SystemMessage(content=response.content))
+            print(f"Chino: {response.content}\n\nSources: {query_sources})")
+            continue
+        messages.append(HumanMessage(content=prompt))
+        response: BaseMessage = model.invoke(messages)
+        messages.append(SystemMessage(content=response.content))
+        print(f"Chino: {response.content}")
 
 
 def main(
         prompt: str = typer.Option(None, '-p', '--prompt', help="Prompt for ChatGPT"),
-        quit: bool = typer.Option(False, '-q', '--quit', help="Quit the running conversation"),
-):
-    run_conversation(prompt)
+        query: bool = typer.Option(False, '-q', '--query', help="Query for your data")
+) -> None:
+    run_conversation(prompt, query)
 
 
 if __name__ == "__main__":
