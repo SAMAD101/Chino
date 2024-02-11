@@ -2,3 +2,7 @@
 .venv/
 data/
 chroma/
+
+.pdm-python
+
+*.egg-info

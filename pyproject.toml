@@ -1,0 +1,26 @@
+[project]
+name = "Chino"
+version = "0.1.0"
+description = "Chino is a terminal based chatbot based on ChatGPT."
+authors = [
+    {name = "Sam", email = "asamadans@gmail.com"},
+]
+dependencies = [
+    "langchain>=0.1.6",
+    "langchain-community>=0.0.19",
+    "langchain-openai>=0.0.5",
+    "typer[all]>=0.9.0",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pdm]
+package-type = "library"
+
+[tool.pdm.scripts]
+start = "python src/chino/main.py"
