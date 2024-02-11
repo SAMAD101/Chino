@@ -27,4 +27,9 @@ package-type = "library"
 [tool.pdm.scripts]
 start = "python src/chino/main.py"
 embed = "python src/chino/utils/create_database.py"
-lint = "pre-commit run"
+lint = "pre-commit run --all-files"
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pre-commit>=3.6.1",
+]
