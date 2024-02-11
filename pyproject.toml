@@ -10,6 +10,8 @@ dependencies = [
     "langchain-community>=0.0.19",
     "langchain-openai>=0.0.5",
     "typer[all]>=0.9.0",
+    "unstructured[pdf]>=0.11.8",
+    "chromadb>=0.4.22",
 ]
 requires-python = ">=3.11"
 readme = "README.md"
@@ -24,3 +26,5 @@ package-type = "library"
 
 [tool.pdm.scripts]
 start = "python src/chino/main.py"
+embed = "python src/chino/utils/create_database.py"
+lint = "pre-commit run"
