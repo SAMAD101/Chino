@@ -30,6 +30,6 @@ embed = "python src/chino/utils/create_database.py"
 lint = "pre-commit run --all-files"
 
 [tool.pdm.dev-dependencies]
-test = [
+dev = [
     "pre-commit>=3.6.1",
 ]

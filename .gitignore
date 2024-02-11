@@ -5,4 +5,5 @@ chroma/
 
 .pdm-python
 
+__pycache__
 *.egg-info
