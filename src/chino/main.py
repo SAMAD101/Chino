@@ -47,7 +47,9 @@ def run_query(prompt: str) -> None:
         messages.append(HumanMessage(content=query_text))
         response: BaseMessage = model.invoke(messages)
         messages.append(SystemMessage(content=response.content))
-        console.print(f"[b blue]Chino:[/b blue] {response.content}\n\n[i violet]Sources:[/i violet]{query_sources}")
+        console.print(
+            f"[b blue]Chino:[/b blue] {response.content}\n\n[i violet]Sources:[/i violet]{query_sources}"
+        )
         console.rule()
 
 
@@ -72,8 +74,8 @@ def run_conversation(prompt: str, query: bool) -> None:
 
 
 def main(
-        prompt: str = typer.Option(None, '-p', '--prompt', help="Prompt for ChatGPT"),
-        query: bool = typer.Option(False, '-q', '--query', help="Query for your data")
+    prompt: str = typer.Option(None, "-p", "--prompt", help="Prompt for ChatGPT"),
+    query: bool = typer.Option(False, "-q", "--query", help="Query for your data"),
 ) -> None:
     run_conversation(prompt, query)
 

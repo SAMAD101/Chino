@@ -34,9 +34,13 @@ def query_data(query_text: str) -> Tuple[str, List[str]]:
         print(f"Unable to find matching results.")
         sys.exit()
 
-    context_text: str = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
+    context_text: str = "\n\n---\n\n".join(
+        [doc.page_content for doc, _score in results]
+    )
     prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
-    query_prompt = "QUERY:"+prompt_template.format(context=context_text, question=query_text)
+    query_prompt = "QUERY:" + prompt_template.format(
+        context=context_text, question=query_text
+    )
     # This prompt will serve as a context for the model to generate a response.
 
     query_sources = [doc.metadata.get("source", None) for doc, _score in results]

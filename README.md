@@ -18,7 +18,7 @@ python main.py --help
 chi --help
 ```
 
-## Note: 
+## Note:
 You will need an OpenAI API key to make is work. Get your API key from OpenAI website and setup like this:
 ```bash
 export OPENAI_API_KEY="<your_api_key>"
