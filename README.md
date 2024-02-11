@@ -1,4 +1,4 @@
-# Chino 🧠
+# Chino 🌸
 
 <div>
   <p> 
@@ -140,13 +140,41 @@ pyenv install 3.11.7
 - **Start the Project**:
   Use PDM to run the project:
   ```bash
-  pdm start
+  pdm run start
   ```
 
 > Other commands are in `pyproject.toml` [tool.pdm.scripts]
 
 ## ⚠️ Note:
+
 You will need an OpenAI API key to make it work. Get your API key from OpenAI website and set it as an environment variable:
 ```bash
 export OPENAI_API_KEY="<your_api_key>"
 ```
+
+## Usage 📖
+
+For using the Retrieval Augmented Generation (RAG) features, follow these steps:
+
+1. You will need to put your documents in the `data/` directory in the root of the project.
+    Create `data/` directory in the root of the project if it doesn't exist.
+    ```bash
+    mkdir data
+    ```
+   
+2. Create a directory in the root of the project called `chroma/`.
+    This directory will contain the OpenAI embeddings (embedding vectors) for the documents.
+
+3. Process the documents and create the embeddings using the following command:
+    ```bash
+    pdm run process
+    ```
+
+### Using Query mode:
+
+Once your documents are processed. You can use the query mode to give prompts for the documents [RAG].
+
+```bash
+pdm run -q
+```
+or, you can use `\q:` before your prompt to use it in query mode.
