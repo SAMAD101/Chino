@@ -14,33 +14,51 @@ from langchain_openai import ChatOpenAI
 
 from utils.query_data import query_data
 
+
 model: ChatOpenAI = ChatOpenAI(model_name="gpt-4-0125-preview")
+
+messages: List[Union[SystemMessage, HumanMessage]] = [
+    SystemMessage(
+        content="You are Chino, a chatbot based on ChatGPT. 'Chino' means 'intelligence' in Japanese."
+    ),
+]
+
+
+def get_response(prompt: str) -> None:
+    messages.append(HumanMessage(content=prompt))
+    response: BaseMessage = model.invoke(messages)
+    messages.append(SystemMessage(content=response.content))
+    print(f"\n Chino: {response.content}\n-------------------\n")
+
+
+def run_query(prompt: str) -> None:
+    global model, messages
+
+    query_text, query_sources = query_data(prompt)
+    messages.append(HumanMessage(content=query_text))
+    response: BaseMessage = model.invoke(messages)
+    messages.append(SystemMessage(content=response.content))
+    print(f"\nChino: {response.content}\n\nSources: {query_sources})\n-------------------\n")
 
 
 def run_conversation(prompt: str, query: bool) -> None:
-    global model
+    global model, messages
 
-    messages: List[Union[SystemMessage, HumanMessage]] = [
-        SystemMessage(
-            content="You are Chino, a chatbot based on ChatGPT. 'Chino' means 'intelligence' in Japanese."
-        ),
-    ]
+    if prompt:
+        if query or prompt.lower().startswith("\\query:"):
+            run_query(prompt)
+            return
+        get_response(prompt)
+        return
 
     while True:
         prompt: str = input("You: ")
         if prompt == "quit":
             break
-        elif query or prompt.lower().startswith("query:"):
-            query_text, query_sources = query_data(prompt)
-            messages.append(HumanMessage(content=query_text))
-            response: BaseMessage = model.invoke(messages)
-            messages.append(SystemMessage(content=response.content))
-            print(f"\nChino: {response.content}\n\nSources: {query_sources})\n-------------------\n")
+        elif query or prompt.lower().startswith("\\query:"):
+            run_query(prompt)
             continue
-        messages.append(HumanMessage(content=prompt))
-        response: BaseMessage = model.invoke(messages)
-        messages.append(SystemMessage(content=response.content))
-        print(f"\nChino: {response.content}\n-------------------\n")
+        get_response(prompt)
 
 
 def main(
