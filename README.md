@@ -22,7 +22,7 @@
 </div>
 
 <p align="center">
-  <img width="320" height="320" src="artwork/logo.png" alt="Material Bread logo" style="margin-right:20px;">
+  <img width="320" height="320" src="artwork/chino_logo_1.png" alt="Material Bread logo" style="margin-right:20px;">
 </p>
 
 <hr> 
