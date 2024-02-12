@@ -1,8 +1,8 @@
 # Chino 🌸
 
 <div>
-  <p> 
-  Chino is a terminal-based chatbot. Powered by OpenAI. Uses RAG to generate 
+  <p>
+  Chino is a terminal-based chatbot. Powered by OpenAI. Uses RAG to generate
   </p>
   <a href="https://kuma.fosscu.org/status/LinkLiberate" target="_blank"><img src="https://badgen.net/badge/status/Under Development/red?icon=lgtm" alt=""></a>
 
@@ -18,14 +18,14 @@
   ![Repo Size](https://img.shields.io/github/repo-size/SAMAD101/Chino)
   ![Code Size](https://img.shields.io/github/languages/code-size/SAMAD101/Chino)
   ![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)
-  
+
 </div>
 
 <p align="center">
   <img width="320" height="320" src="artwork/chino_logo_1.png" alt="Material Bread logo" style="margin-right:20px;">
 </p>
 
-<hr> 
+<hr>
 
 ## 🤔 Pre-requisites
 
@@ -38,7 +38,7 @@ This project is designed to be compatible with specific versions of Python for o
 
 ### Supported Python Version
 
-- **Python 3.11.6**
+- **Python 3.11.7**
 
 > ❗️ For the best experience and performance, it is recommended to use the version mentioned above.
 
@@ -161,7 +161,7 @@ For using the Retrieval Augmented Generation (RAG) features, follow these steps:
     ```bash
     mkdir data
     ```
-   
+
 2. Create a directory in the root of the project called `chroma/`.
     This directory will contain the OpenAI embeddings (embedding vectors) for the documents.
 
