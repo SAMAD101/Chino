@@ -21,7 +21,7 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
-keywords = ["chatbot", "terminal", "openai", "rag"]
+keywords = ["chatbot", "terminal", "openai", "rag", "bumpver"]
 
 [build-system]
 requires = ["setuptools>=61", "wheel"]
@@ -34,4 +34,16 @@ dev = ["black", "pytest", "pre-commit", "twine"]
 Homepage = "https://github.com/SAMAD101/Chino"
 
 [project.scripts]
-chino = "chino.__main__:main"
+chino = "chino.__main__:app"
+
+[tool.bumpver]
+current_version = "1.0.0"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message  = "Bump version {old_version} -> {new_version}"
+commit          = true
+tag             = true
+push            = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
+"src/reader/__init__.py" = ["{version}"]

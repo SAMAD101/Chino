@@ -1,91 +1,42 @@
-# !/usr/bin/python
+import os
 
-import typer
+from typer import Typer
 
-from typing import List, Union
+from .query import Query
+from .conversation import Conversation
+from .migrations import Migration
 
-from rich.console import Console
 
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    SystemMessagePromptTemplate,
+app: Typer = Typer(
+    help="Chino is a chatbot based on OpenAI. It can also provide responses about queries on user-provided data."
 )
-from langchain.schema import HumanMessage, SystemMessage, BaseMessage
-from langchain_openai import ChatOpenAI
-
-from .store.query import query_data
-from .store.migrations import generate_data_store
 
 
-app = typer.Typer()
-console = Console()
-
-model: ChatOpenAI = ChatOpenAI()
-
-messages: List[Union[SystemMessage, HumanMessage]] = [
-    SystemMessage(
-        content="You are Chino, a chatbot based on ChatGPT. 'Chino' means 'intelligence' in Japanese."
-    ),
-]
-
-
-def get_response(prompt: str) -> None:
-    global model, messages
-
-    with console.status("[i]thinking...[/i]"):
-        messages.append(HumanMessage(content=prompt))
-        response: BaseMessage = model.invoke(messages)
-        messages.append(SystemMessage(content=response.content))
-        console.print(f"[b blue]Chino:[/b blue] {response.content}")
-        console.rule()
-
-
-def run_query(prompt: str) -> None:
-    global model, messages
-
-    with console.status("[i]thinking...[/i]"):
-        query_text, query_sources = query_data(prompt)
-        messages.append(HumanMessage(content=query_text))
-        response: BaseMessage = model.invoke(messages)
-        messages.append(SystemMessage(content=response.content))
-        console.print(
-            f"[b blue]Chino:[/b blue] {response.content}\n\n[i violet]Sources:[/i violet]{query_sources}"
-        )
-        console.rule()
-
-
-def run_conversation(prompt: str, query: bool) -> None:
-    global model, messages
-
-    if prompt:
-        if query or prompt.lower().startswith("\\q:"):
-            run_query(prompt)
-            return
-        get_response(prompt)
-        return
-
-    while True:
-        prompt: str = console.input("[b green]You: [/b green]")
-        if prompt == "quit":
-            break
-        elif query or prompt.lower().startswith("\\query:"):
-            run_query(prompt)
-            continue
-        get_response(prompt)
-
-
-def main(
-    prompt: str = typer.Option(None, "-p", "--prompt", help="Prompt for ChatGPT"),
-    query: bool = typer.Option(False, "-q", "--query", help="Query for your data"),
-    process: bool = typer.Option(False, "--process", help="Process your data"),
+@app.command()
+def migrate(
+    chroma_path: str = os.path.expanduser("~/.local/share/chino/chroma/"),
+    data_path: str = os.path.expanduser("~/.local/share/chino/data/"),
 ) -> None:
-    if process:
-        console.status("Processing your data...")
-        generate_data_store()
-        return
-    run_conversation(prompt, query)
+    """Migrate the data to the chroma using vector embeddings."""
+
+    migration = Migration(chroma_path, data_path)
+    migration.generate_data_store()
 
 
-if __name__ == "__main__":
-    typer.run(main)
+@app.command("start")
+def main():
+    """Start the main event loop function. A chat interface will be opened."""
+
+    conversation: Conversation = Conversation()
+    try:
+        while True:
+            prompt = conversation.console.input("[bold green]You: [/bold green]")
+            if prompt == "quit":
+                conversation.console.print("[bold red]Quiting...[/bold red]")
+                break
+            elif prompt.lower().startswith("\\q:"):
+                conversation.run_query(prompt)
+                continue
+            conversation.get_response(prompt)
+    except KeyboardInterrupt:
+        conversation.console.print("\n[bold red]Quiting...[/bold red]")
