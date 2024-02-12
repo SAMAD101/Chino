@@ -2,7 +2,8 @@
 
 <div>
   <p>
-  Chino is a terminal-based chatbot. Powered by OpenAI. Uses RAG to generate
+  Chino is a terminal-based chatbot. Powered by OpenAI. <br>
+  Uses RAG to generate responses based on user-provided documents.
   </p>
   <a href="https://kuma.fosscu.org/status/LinkLiberate" target="_blank"><img src="https://badgen.net/badge/status/Under Development/red?icon=lgtm" alt=""></a>
 
