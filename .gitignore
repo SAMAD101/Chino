@@ -5,6 +5,7 @@ data/
 chroma/
 
 build/
+dist/
 
 .pdm-python
 

@@ -27,11 +27,6 @@
 
 <hr>
 
-## 🤔 Pre-requisites
-
-- `python3`
-- `pdm`
-
 ## 🐍 Python Version Support
 
 This project is designed to be compatible with specific versions of Python for optimal performance and stability.
@@ -63,7 +58,10 @@ pyenv install 3.11.7
 > When you navigate to this project's directory in the future, `pyenv` will automatically select the recommended Python version, thanks to the `.python-version` file in the project root.
 
 ## Installation 🛠️
-> Coming soon!
+
+```bash
+pip install chinoai
+```
 
 
 # 📦 Setup
@@ -107,14 +105,10 @@ pyenv install 3.11.7
 
 ## Local setup 🛠️ without Docker 🐳
 
-### Setting Up the Project with PDM
-
-[PDM (Python Development Master)](https://pdm.fming.dev/latest/) is utilized for dependency management in this project. To set up and run the project:
-
-- **Installing PDM**:
-  Before you begin, ensure you have PDM installed. If not, refer to the [official documentation](https://pdm.fming.dev/latest/) to install PDM.
+### Setting Up the Project for development
 
 - **Clone the Repository**:
+
   Get the project source code from GitHub:
 
   ```bash
@@ -127,23 +121,19 @@ pyenv install 3.11.7
   cd Chino
   ```
 
-- **Install Dependencies**:
-  Use PDM to install the project's dependencies:
-  ```bash
-  pdm install
-  ```
-  To install dev dependencies:
-  ```bash
-  pdm install -G dev
-  ```
-
-- **Start the Project**:
+- **Install the Project (from source)**:
+-
   Use PDM to run the project:
+
   ```bash
-  pdm run start
+  python3 -m pip install -e .
   ```
 
-> Other commands are in `pyproject.toml` [tool.pdm.scripts]
+- **Run the project:**
+
+  ```bash
+  chino --help
+  ```
 
 ## ⚠️ Note:
 
@@ -154,27 +144,30 @@ export OPENAI_API_KEY="<your_api_key>"
 
 ## Usage 📖
 
+Commands and options are available by running:
+
+```bash
+chino --help
+```
 For using the Retrieval Augmented Generation (RAG) features, follow these steps:
 
-1. You will need to put your documents in the `data/` directory in the root of the project.
-    Create `data/` directory in the root of the project if it doesn't exist.
+1. You will need to put your documents in the `~/.local/share/chino/data` directory in the root of the project.
     ```bash
     mkdir data
     ```
-
-2. Create a directory in the root of the project called `chroma/`.
+2. Create a directory in the root of the project called `~/.local/share/chino/chroma`.
     This directory will contain the OpenAI embeddings (embedding vectors) for the documents.
 
 3. Process the documents and create the embeddings using the following command:
     ```bash
-    pdm run process
+    chino migrate
     ```
-
+> The directory data and chroma directories will be made more configurable in the future releases.
 ### Using Query mode:
 
 Once your documents are processed. You can use the query mode to give prompts for the documents [RAG].
-
+Start Chino by running:
 ```bash
-pdm run -q
+chino start
 ```
-or, you can use `\q:` before your prompt to use it in query mode.
+and use `\q:` before your prompt to use it in query mode.
