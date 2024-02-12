@@ -14,10 +14,6 @@ CHROMA_PATH: str = "chroma"
 DATA_PATH: str = "data"
 
 
-def main() -> None:
-    generate_data_store()
-
-
 def generate_data_store() -> None:
     documents: Any = load_documents()
     chunks = split_text(documents)
@@ -54,7 +50,3 @@ def save_to_chroma(chunks: List[Document]):
     )
     db.persist()
     print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
-
-
-if __name__ == "__main__":
-    main()

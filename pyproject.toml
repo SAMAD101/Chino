@@ -1,5 +1,5 @@
 [project]
-name = "Chino"
+name = "chino"
 version = "0.1.0"
 description = "Chino is a terminal based chatbot based on ChatGPT."
 authors = [
@@ -15,21 +15,23 @@ dependencies = [
 ]
 requires-python = ">=3.11"
 readme = "README.md"
-license = {text = "MIT"}
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["chatbot", "terminal", "openai", "rag"]
 
 [build-system]
 requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.pdm]
-package-type = "library"
+[project.optional-dependencies]
+dev = ["black", "pytest", "pre-commit", "twine"]
 
-[tool.pdm.scripts]
-start = "python src/chino/main.py"
-process = "python src/chino/utils/create_database.py"
-lint = "pre-commit run --all-files"
+[project.urls]
+Homepage = "https://github.com/SAMAD101/Chino"
 
-[tool.pdm.dev-dependencies]
-dev = [
-    "pre-commit>=3.6.1",
-]
+[project.scripts]
+chino = "chino.__main__:main"

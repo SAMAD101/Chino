@@ -1,7 +1,10 @@
 .idea/
 .venv/
+
 data/
 chroma/
+
+build/
 
 .pdm-python
 

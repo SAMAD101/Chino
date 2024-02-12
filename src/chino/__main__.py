@@ -14,7 +14,9 @@ from langchain.prompts.chat import (
 from langchain.schema import HumanMessage, SystemMessage, BaseMessage
 from langchain_openai import ChatOpenAI
 
-from utils.query_data import query_data
+from .store.query import query_data
+from .store.migrations import generate_data_store
+
 
 app = typer.Typer()
 console = Console()
@@ -76,7 +78,12 @@ def run_conversation(prompt: str, query: bool) -> None:
 def main(
     prompt: str = typer.Option(None, "-p", "--prompt", help="Prompt for ChatGPT"),
     query: bool = typer.Option(False, "-q", "--query", help="Query for your data"),
+    process: bool = typer.Option(False, "--process", help="Process your data"),
 ) -> None:
+    if process:
+        console.status("Processing your data...")
+        generate_data_store()
+        return
     run_conversation(prompt, query)
 
 
