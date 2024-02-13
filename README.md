@@ -58,9 +58,26 @@ pyenv install 3.11.7
 
 ## Installation 🛠️
 
+### Install using pip:
 ```bash
 pip install chinoai
 ```
+
+### Build from source:
+- Clone the repository:
+  ```bash
+  git clone https://github.com/SAMAD101/Chino.git
+  ```
+
+- Navigate to the project Directory:
+  ```bash
+  cd Chino
+  ```
+
+- Install using:
+  ```bash
+  pip install .
+  ```
 
 
 # 📦 Setup
