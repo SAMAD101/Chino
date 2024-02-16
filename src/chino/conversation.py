@@ -20,23 +20,17 @@ class Conversation:
         ]
         self.console = Console()
 
-    def get_response(self, prompt: str) -> None:
+    def get_response(self, prompt: str) -> BaseMessage:
         with self.console.status("[i]thinking...[/i]"):
             self.messages.append(HumanMessage(content=prompt))
             response: BaseMessage = self.model.invoke(self.messages)
-            self.messages.append(SystemMessage(content=response.content))
-            self.console.print(f"[b blue]Chino:[/b blue] {response.content}")
-            self.console.rule()
+            return response
 
-    def run_query(self, prompt: str) -> None:
+    def run_query(self, prompt: str) -> BaseMessage:
         with self.console.status("[i]thinking...[/i]"):
             query_text, query_sources = Query(
                 prompt, os.path.expanduser("~/.local/share/chino/chroma/")
             ).query_data()
             self.messages.append(HumanMessage(content=query_text))
             response: BaseMessage = self.model.invoke(self.messages)
-            self.messages.append(SystemMessage(content=response.content))
-            self.console.print(
-                f"[b blue]Chino:[/b blue] {response.content}\n\n[i violet]Sources:[/i violet]{query_sources}"
-            )
-            self.console.rule()
+            return response
