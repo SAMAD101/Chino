@@ -167,18 +167,17 @@ chino --help
 ```
 For using the Retrieval Augmented Generation (RAG) features, follow these steps:
 
-1. You will need to put your documents in the `~/.local/share/chino/data` directory in the root of the project.
-    ```bash
-    mkdir data
-    ```
-2. Create a directory in the root of the project called `~/.local/share/chino/chroma`.
-    This directory will contain the OpenAI embeddings (embedding vectors) for the documents.
+1. You will need to put your documents in the `~/.local/share/chino/data` directory. If not there, make one.
+
+2. Also,make sure you have a directory: `~/.local/share/chino/chroma`. This directory will contain the OpenAI embeddings (embedding vectors) for the documents.
 
 3. Process the documents and create the embeddings using the following command:
     ```bash
     chino migrate
     ```
+
 > The directory data and chroma directories will be made more configurable in the future releases.
+
 ### Using Query mode:
 
 Once your documents are processed. You can use the query mode to give prompts for the documents [RAG].
