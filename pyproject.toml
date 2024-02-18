@@ -29,6 +29,7 @@ build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = ["black", "pytest", "pre-commit", "twine"]
+test = ["pytest"]
 
 [project.urls]
 Homepage = "https://github.com/SAMAD101/Chino"
