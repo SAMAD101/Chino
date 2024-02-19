@@ -1,6 +1,6 @@
 [project]
 name = "chinoai"
-version = "0.1.0"
+version = "1.0.0"
 description = "Chino is a terminal based chatbot based on ChatGPT."
 authors = [
     {name = "Sam", email = "asamadans@gmail.com"},
@@ -47,4 +47,4 @@ push            = false
 
 [tool.bumpver.file_patterns]
 "pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
-"src/reader/__init__.py" = ["{version}"]
+"src/chino/__init__.py" = ["{version}"]

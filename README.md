@@ -101,11 +101,17 @@ pip install chinoai
   ```
 
 - **Install the Project (from source)**:
--
+
   Use PDM to run the project:
 
   ```bash
   python3 -m pip install -e .
+  ```
+
+- **Install pre-commit hooks**:
+
+  ```bash
+  pre-commit install
   ```
 
 - **Run the project:**

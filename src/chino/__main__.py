@@ -1,14 +1,18 @@
 import os
+import typer
 
-from typer import Typer
+from typer import Typer, Context, Option
 
 from .conversation import Conversation
 from .migrations import Migration
 
 from .utils import fancy_print
 
+from chino import __version__
+
+
 app: Typer = Typer(
-    help="Chino is a chatbot based on OpenAI. It can also provide responses about queries on user-provided data."
+    help="Chino is a chatbot based on OpenAI. It can also provide responses about queries on user-provided data.",
 )
 
 
@@ -23,10 +27,9 @@ def migrate(
     migration.generate_data_store()
 
 
-@app.command("start")
-def main() -> None:
+@app.command()
+def start() -> None:
     """Start the main event loop function. A chat interface will be opened."""
-
     conv: Conversation = Conversation()
     try:
         while True:
@@ -40,3 +43,9 @@ def main() -> None:
             fancy_print(conv.console, conv.get_response(prompt).content)
     except KeyboardInterrupt:
         conv.console.print("\n[bold red]Quiting...[/bold red]")
+
+
+@app.command()
+def version() -> None:
+    """Print the version of the chino package."""
+    typer.echo(f"Chino {__version__}")
