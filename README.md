@@ -80,55 +80,18 @@ pip install chinoai
   ```
 
 
-# 📦 Setup
-
-## Local setup 🛠️ with Docker 🐳
-
-> Coming soon!
-
-<!--
-- **Installing and running**:
-  Before you begin, ensure you have docker installed. If not, refer to the [official documentation](https://docs.docker.com/engine/install/) to install docker.
-  ```bash
-  docker pull samad101/Chino
-  docker run -d -p 8080:8080 --name pastepyprod samad101
-  ```
-  -->
-
-<!--
-- **Using docker-compose**:
-  You can also use docker-compose to run the project locally by running the following command:
-  <br>
-  - **Clone the repository**:
-  Get the project source code from GitHub:
-
-  ```bash
-  git clone https://github.com/SAMAD101/Chino.git
-  ```
-
-  - **Navigate to the Project Directory**:
-
-  ```bash
-  cd Chino
-  ```
-
-  - **Run the project using docker-compose**:
-
-  ```bash
-  docker-compose up
-  ```
--->
-
-## Local setup 🛠️ without Docker 🐳
+# 📦 Setup for development
 
 ### Setting Up the Project for development
 
-- **Clone the Repository**:
+- **Fork the Repository**:
 
-  Get the project source code from GitHub:
+  Get your own fork/copy of the project from GitHub by clicking the "Fork" button.
+
+- **Clone the forked Repository**
 
   ```bash
-  git clone https://github.com/SAMAD101/Chino.git
+  git clone <your-fork-url>
   ```
 
 - **Navigate to the Project Directory**:
