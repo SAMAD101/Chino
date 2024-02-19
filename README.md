@@ -7,13 +7,9 @@
   </p>
   <img src="https://badgen.net/badge/status/Under Development/red?icon=lgtm" alt="">
 
-  ![Version](https://img.shields.io/badge/Version-0.1.0-brightgreen.svg)
+  ![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen.svg)
   ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-  ![GitHub Issues](https://img.shields.io/github/issues/SAMAD101/Chino)
-  ![GitHub Pull Requests](https://img.shields.io/github/issues-pr/SAMAD101/Chino)
   ![Commits](https://img.shields.io/github/commit-activity/m/SAMAD101/Chino)
-  ![Last Commit](https://img.shields.io/github/last-commit/SAMAD101/Chino)
-  ![Contributors](https://img.shields.io/github/contributors/SAMAD101/Chino)
   ![Repo Size](https://img.shields.io/github/repo-size/SAMAD101/Chino)
   ![Code Size](https://img.shields.io/github/languages/code-size/SAMAD101/Chino)
   ![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)
