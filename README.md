@@ -80,6 +80,10 @@ pip install chinoai
 
 ### Setting Up the Project for development
 
+#### Contributing to the Project:
+> Refer to the [Contributing Guide](CONTRIBUTING.md) for detailed information on how to contribute to this project, including setup instructions for development.
+> And also refer to the [Code of Conduct](CODE_OF_CONDUCT.md) for the community guidelines.
+
 - **Fork the Repository**:
 
   Get your own fork/copy of the project from GitHub by clicking the "Fork" button.
