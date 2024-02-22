@@ -1,14 +1,16 @@
 import sys
 
-from typing import List, Tuple
+from typing import Optional, Tuple, List
 
 from langchain.vectorstores.chroma import Chroma
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
 
 
 class Query:
-    def __init__(self, prompt: str = None, chroma_path: str = None) -> None:
+    def __init__(
+        self, prompt: Optional[str] = None, chroma_path: Optional[str] = None
+    ) -> None:
         self.query_text = prompt
         self.CHROMA_PATH = chroma_path
 

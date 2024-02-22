@@ -1,7 +1,7 @@
 import os
 import shutil
 
-from typing import Any, List
+from typing import Optional, Union, Any, List
 
 from langchain_community.document_loaders import DirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -11,9 +11,11 @@ from langchain.vectorstores.chroma import Chroma
 
 
 class Migration:
-    def __init__(self, chroma_path: str = None, data_path: str = None) -> None:
-        self.CHROMA_PATH: str = chroma_path
-        self.DATA_PATH: str = data_path
+    def __init__(
+        self, chroma_path: Optional[str] = None, data_path: Optional[str] = None
+    ) -> None:
+        self.CHROMA_PATH: Union[str, None] = chroma_path
+        self.DATA_PATH: Union[str, None] = data_path
 
     def generate_data_store(self) -> None:
         documents: Any = Migration._load_documents(self.DATA_PATH)
@@ -21,7 +23,7 @@ class Migration:
         Migration._save_to_chroma(chunks, self.CHROMA_PATH)
 
     @classmethod
-    def _load_documents(cls, data_path):
+    def _load_documents(cls, data_path: Optional[str]) -> Any:
         loader: DirectoryLoader = DirectoryLoader(data_path)
         documents: Any = loader.load()
         return documents
@@ -40,10 +42,12 @@ class Migration:
         return chunks
 
     @classmethod
-    def _save_to_chroma(cls, chunks: List[Document], chroma_path: str):
+    def _save_to_chroma(
+        cls, chunks: List[Document], chroma_path: Optional[str] = None
+    ) -> None:
         # Clear out the database first.
-        if os.path.exists(chroma_path):
-            shutil.rmtree(chroma_path)
+        if os.path.exists(chroma_path):  # type: ignore
+            shutil.rmtree(chroma_path)  # type: ignore
 
         # Create a new DB from the documents.
         db: Chroma = Chroma.from_documents(
