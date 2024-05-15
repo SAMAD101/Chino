@@ -38,7 +38,10 @@ def start() -> None:
                 conv.console.print("[bold red]Quiting...[/bold red]")
                 break
             elif prompt.lower().startswith("\\q:"):
-                fancy_print(conv.console, conv.run_query(prompt).content, isQuery=True)
+                quried_res = conv.run_query(prompt)
+                fancy_print(conv.console, quried_res[0], isQuery=True)
+                conv.console.print(f"[bold blue]Sources:[/bold blue] {quried_res[1]}")
+                conv.console.rule()
                 continue
             fancy_print(conv.console, conv.get_response(prompt).content)
     except KeyboardInterrupt:

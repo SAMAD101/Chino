@@ -33,4 +33,4 @@ class Conversation:
             ).query_data()
             self.messages.append(HumanMessage(content=query_text))
             response: BaseMessage = self.model.invoke(self.messages)
-            return response
+            return [response, query_sources]
